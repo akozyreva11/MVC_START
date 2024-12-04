@@ -1,39 +1,36 @@
-package com.example.MVC_START.model;
+package com.example.MVC_START.modelDTO;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-
 public class Recommendation {
-    private UUID id;
+    private UUID user_id;
 
-    private Collection<Product> recommendations;
+    private List<Product> recommendations;
 
-    public Recommendation(UUID id, List<Product> recommendations) {
-        this.id = id;
+    public Recommendation(UUID user_id, List<Product> recommendations) {
+        this.user_id = user_id;
         this.recommendations = recommendations;
     }
 
     public Recommendation() {
     }
 
-    public Collection<Product> getRecommendations() {
+    public List<Product> getRecommendations() {
         return recommendations;
     }
 
-    public void setRecommendations(Collection<Product> recommendations) {
+    public void setRecommendations(List<Product> recommendations) {
         this.recommendations = recommendations;
     }
 
     public UUID getId() {
-        return id;
+        return user_id;
     }
 
     public void setId(UUID id) {
-        this.id = id;
+        this.user_id = id;
     }
-
 
 
     @Override
@@ -41,18 +38,18 @@ public class Recommendation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Recommendation that = (Recommendation) o;
-        return id == that.id && Objects.equals(recommendations, that.recommendations);
+        return user_id == that.user_id && Objects.equals(recommendations, that.recommendations);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, recommendations);
+        return Objects.hash(user_id, recommendations);
     }
 
     @Override
     public String toString() {
         return "Recommendation{" +
-                "id=" + id +
+                "user_id=" + user_id +
                 ", recommendations=" + recommendations +
                 '}';
     }
