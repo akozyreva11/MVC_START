@@ -1,5 +1,6 @@
 package com.example.MVC_START.controller;
 
+import com.example.MVC_START.interfice.RecommendationRuleSet;
 import com.example.MVC_START.modelDTO.Recommendation;
 import com.example.MVC_START.repositories.RecommendationsRepository;
 import com.example.MVC_START.service.StarUser;
@@ -18,13 +19,21 @@ import java.util.UUID;
 
 public class StartController {
 
-    @Autowired
-    StarUser starUser;
-    RecommendationsRepository recommendationsRepository;
+private final RecommendationRuleSet recommendationRuleSet;
 
-    @GetMapping("/{user_id}")
-    public Recommendation loadSomeData(@PathVariable UUID user_id) {
 
-        return starUser.getRecommendation(user_id);
+    public StartController(RecommendationRuleSet recommendationRuleSet) {
+        this.recommendationRuleSet = recommendationRuleSet;
     }
-}
+    @GetMapping()
+        public Recommendation getRecommendation(@RequestParam UUID id) {
+            return recommendationRuleSet.getRecommendation(id);
+
+        }
+        @GetMapping("/test/{id}")
+        public int test(@PathVariable UUID id) {
+            return recommendationRuleSet.get(id);
+        }
+
+    }
+
