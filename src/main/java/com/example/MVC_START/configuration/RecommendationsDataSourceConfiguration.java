@@ -3,8 +3,10 @@ package com.example.MVC_START.configuration;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
@@ -26,5 +28,10 @@ public class RecommendationsDataSourceConfiguration {
             @Qualifier("recommendationsDataSource") DataSource dataSource
     ) {
         return new JdbcTemplate(dataSource);
+    }
+    @Primary
+    @Bean
+    public DataSource defaultDataSource(DataSourceProperties properties) {
+        return properties.initializeDataSourceBuilder().build();
     }
 }
