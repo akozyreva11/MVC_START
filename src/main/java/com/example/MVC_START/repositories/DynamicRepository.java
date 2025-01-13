@@ -9,6 +9,8 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
 
+import static com.example.MVC_START.modelDTO.OfferProduct.*;
+
 @Repository
 public class DynamicRepository {
 
@@ -37,7 +39,7 @@ public class DynamicRepository {
                     "WHERE t.user_id = ? GROUP BY p.name HAVING SUM(t.amount) ? ?";
             return jdbcTemplate.query(sql,
                     new ProductMapper(),
-                    offerProduct.getTEXT_INVEST_500(),
+                    TEXT_INVEST_500,
                     userOf.get().getArguments(),
                     user,
                     argumentsTransactionSumCompareDepositWithdraw[0],
@@ -65,7 +67,7 @@ public class DynamicRepository {
                     new ProductMapper(),
                     argumentsTransactionSumCompare[1],
                     user,
-                    offerProduct.getTEXT_TOP_SAVING(),
+                    TEXT_TOP_SAVING,
                     userOf.get().getArguments(),
                     argumentsTransactionSumCompare[2],
                     argumentsTransactionSumCompare[3],
@@ -98,7 +100,7 @@ public class DynamicRepository {
                     new ProductMapper(),
                     argumentsTransactionSumCompare[1],
                     user,
-                    offerProduct.getTEXT_SIMPLE_LOAN(),
+                    TEXT_SIMPLE_LOAN,
                     userOf.get().getArguments(),
                     argumentsTransactionSumCompareDepositWithdraw[0],
                     argumentsTransactionSumCompareDepositWithdraw[1],

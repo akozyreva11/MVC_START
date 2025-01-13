@@ -6,11 +6,11 @@ import com.example.MVC_START.repositories.RecommendationRulesRepository;
 import org.springframework.stereotype.Service;
 
     @Service
-    public class StartServiceRules implements RecommendationRulesService {
+    public class StartRulesService implements RecommendationRulesService {
 
         private final RecommendationRulesRepository recommendationRulesRepository;
 
-        public StartServiceRules(RecommendationRulesRepository recommendationRulesRepository) {
+        public StartRulesService(RecommendationRulesRepository recommendationRulesRepository) {
             this.recommendationRulesRepository = recommendationRulesRepository;
         }
 

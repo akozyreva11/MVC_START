@@ -12,6 +12,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
+import static com.example.MVC_START.modelDTO.OfferProduct.*;
+
 @Repository
 public class RecommendationsRepository {
     private final JdbcTemplate jdbcTemplate;
@@ -43,7 +45,7 @@ public class RecommendationsRepository {
         String sql = "SELECT p.id, p.name, ? AS SENTENCE_TEXT FROM transactions t " +
                 "JOIN products p ON t.type = 'DEPOSIT' AND p.type IN ('SAVING') " +
                 "WHERE t.user_id = ? GROUP BY p.name HAVING SUM(t.amount) > ?";
-        return jdbcTemplate.query(sql, new ProductMapper(), offerText.getTEXT_INVEST_500(), user, 1000);
+        return jdbcTemplate.query(sql, new ProductMapper(), TEXT_INVEST_500, user, 1000);
 
 
     }
@@ -64,7 +66,7 @@ public class RecommendationsRepository {
                 "AND (ts.total_deposit > ts.total_withdraw) " +
                 "GROUP BY p.NAME;";
 
-        return jdbcTemplate.query(sql, new ProductMapper(), user, offerText.getTEXT_TOP_SAVING());
+        return jdbcTemplate.query(sql, new ProductMapper(), user, TEXT_TOP_SAVING);
     }
 
     private Collection<Product> getSimpleLoan(UUID user){
@@ -83,7 +85,7 @@ public class RecommendationsRepository {
                 "AND (p.TYPE = 'DEBIT' AND ts.total_withdraw > 100000) " +
                 "GROUP BY p.NAME;";
 
-        return jdbcTemplate.query(sql, new ProductMapper(), user, offerText.getTEXT_SIMPLE_LOAN());
+        return jdbcTemplate.query(sql, new ProductMapper(), user, TEXT_SIMPLE_LOAN);
     }
 
 }

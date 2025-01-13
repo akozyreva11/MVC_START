@@ -9,17 +9,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 
 @Service
-public class StarUser implements RecommendationRuleSet {
+public class StarUserService implements RecommendationRuleSet {
 
-    private static final Logger log = LoggerFactory.getLogger(StarUser.class);
+    private static final Logger log = LoggerFactory.getLogger(StarUserService.class);
 
     private final RecommendationsRepository recommendationsRepository;
 
-    public StarUser(RecommendationsRepository recommendationsRepository) {
+    public StarUserService(RecommendationsRepository recommendationsRepository) {
         this.recommendationsRepository = recommendationsRepository;
     }
 

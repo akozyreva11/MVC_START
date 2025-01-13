@@ -1,11 +1,8 @@
 package com.example.MVC_START.modelDTO;
-import org.hibernate.annotations.Entity;
-import org.springframework.data.annotation.Id;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Objects;
 
     @Entity

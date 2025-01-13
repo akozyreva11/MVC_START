@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/rules")
 
-public class StartControllerRules {
+public class RulesController {
 
 
         private final RecommendationRulesService rulesService;
 
 
-        public StartControllerRules(RecommendationRulesService rulesService) {
+        public RulesController(RecommendationRulesService rulesService) {
             this.rulesService = rulesService;
         }
         @PostMapping
