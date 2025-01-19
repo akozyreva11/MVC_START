@@ -4,12 +4,10 @@ import com.example.MVC_START.configuration.ProductMapper;
 import com.example.MVC_START.modelDTO.OfferProduct;
 import com.example.MVC_START.modelDTO.Product;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 
 import static com.example.MVC_START.modelDTO.OfferProduct.*;
@@ -24,16 +22,16 @@ public class RecommendationsRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public int getRandomTransactionAmount(UUID user){
+    public int getRandomTransactionAmount(UUID user) {
         Integer result = jdbcTemplate.queryForObject(
                 "SELECT amount FROM transactions t WHERE t.user_id = ? LIMIT 1",
                 Integer.class, user);
         return result != null ? result : 0;
     }
 
-    public Collection<Product> getTransactionAmount(UUID user){
+    public Collection<Product> getTransactionAmount(UUID user) {
         Collection<Product> products = getInvest500(user);
-        if (!products.isEmpty()){
+        if (!products.isEmpty()) {
             return products;
         }
         products = getTopSaving(user);
@@ -41,7 +39,7 @@ public class RecommendationsRepository {
 
     }
 
-    private Collection<Product> getInvest500(UUID user){
+    private Collection<Product> getInvest500(UUID user) {
         String sql = "SELECT p.id, p.name, ? AS SENTENCE_TEXT FROM transactions t " +
                 "JOIN products p ON t.type = 'DEPOSIT' AND p.type IN ('SAVING') " +
                 "WHERE t.user_id = ? GROUP BY p.name HAVING SUM(t.amount) > ?";
@@ -50,7 +48,7 @@ public class RecommendationsRepository {
 
     }
 
-    private Collection<Product> getTopSaving(UUID user){
+    private Collection<Product> getTopSaving(UUID user) {
         String sql = "WITH TransactionSums AS ( " +
                 "SELECT " +
                 "    SUM(CASE WHEN t.TYPE = 'DEPOSIT' THEN t.AMOUNT ELSE 0 END) AS total_deposit, " +
@@ -69,7 +67,7 @@ public class RecommendationsRepository {
         return jdbcTemplate.query(sql, new ProductMapper(), user, TEXT_TOP_SAVING);
     }
 
-    private Collection<Product> getSimpleLoan(UUID user){
+    private Collection<Product> getSimpleLoan(UUID user) {
         String sql = "WITH TransactionSums AS ( " +
                 "SELECT " +
                 "    SUM(CASE WHEN t.TYPE = 'DEPOSIT' THEN t.AMOUNT ELSE 0 END) AS total_deposit, " +

@@ -25,7 +25,7 @@ public class RulesTotalController {
 
     @Operation(summary = "Hекомендациb для пользователя по id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Получить правила со счётчиком", content = { @Content(mediaType = "application/json",
+            @ApiResponse(responseCode = "200", description = "Получить правила со счётчиком", content = {@Content(mediaType = "application/json",
                     schema = @Schema(implementation = Rules.class))}),
             @ApiResponse(responseCode = "400", description = "Ошибка при вводе данных", content = @Content),
     })
@@ -35,3 +35,15 @@ public class RulesTotalController {
         return RulesTotalService.getTotalRules();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+

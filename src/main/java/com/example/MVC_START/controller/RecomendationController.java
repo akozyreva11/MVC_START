@@ -16,21 +16,23 @@ import java.util.UUID;
 
 public class RecomendationController {
 
-private final RecommendationRuleSet recommendationRuleSet;
+    private final RecommendationRuleSet recommendationRuleSet;
 
 
     public RecomendationController(RecommendationRuleSet recommendationRuleSet) {
         this.recommendationRuleSet = recommendationRuleSet;
     }
-    @GetMapping()
-        public Recommendation getRecommendation(@RequestParam UUID id) {
-            return recommendationRuleSet.getRecommendation(id);
 
-        }
-        @GetMapping("/test/{id}")
-        public int test(@PathVariable UUID id) {
-            return recommendationRuleSet.get(id);
-        }
+    @GetMapping()
+    public Recommendation getRecommendation(@RequestParam UUID id) {
+        return recommendationRuleSet.getRecommendation(id);
 
     }
+
+    @GetMapping("/test/{id}")
+    public int test(@PathVariable UUID id) {
+        return recommendationRuleSet.get(id);
+    }
+
+}
 

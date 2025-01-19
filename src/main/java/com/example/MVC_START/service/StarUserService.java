@@ -30,6 +30,7 @@ public class StarUserService implements RecommendationRuleSet {
         recommendation.setRecommendations(info);
         return recommendation;
     }
+
     @Override
     public int get(UUID id) {
         return recommendationsRepository.getRandomTransactionAmount(id);

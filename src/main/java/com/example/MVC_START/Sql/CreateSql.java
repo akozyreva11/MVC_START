@@ -1,12 +1,13 @@
 package com.example.MVC_START.Sql;
+
 import com.example.MVC_START.modelDTO.OfferProduct;
 import com.example.MVC_START.modelDTO.Rules;
 import com.example.MVC_START.modelDTO.TotalRules;
 import com.example.MVC_START.repositories.RecommendationRulesRepository;
 import com.example.MVC_START.repositories.TotalRulesRepository;
-import org.apache.tomcat.util.digester.Rule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -28,7 +29,7 @@ public class CreateSql {
         this.totalRulesRepository = totalRulesRepository;
     }
 
-    public String createQetInvest500Dynamic(UUID user){
+    public String createQetInvest500Dynamic(UUID user) {
         Optional<Rules> userOf = recommendationRulesRepository.findByQuery("USER_OF");
         examinationTotalRule(userOf);
 
@@ -53,7 +54,7 @@ public class CreateSql {
 
     }
 
-    public String createTopSavingDynamic(UUID user){
+    public String createTopSavingDynamic(UUID user) {
         Optional<Rules> userOf = recommendationRulesRepository.findByQuery("USER_OF");
         examinationTotalRule(userOf);
 
@@ -90,7 +91,8 @@ public class CreateSql {
         return sql;
 
     }
-    public String createSimpleLoanDynamic(UUID user){
+
+    public String createSimpleLoanDynamic(UUID user) {
         Optional<Rules> userOf = recommendationRulesRepository.findByQuery("USER_OF");
         examinationTotalRule(userOf);
 
@@ -119,7 +121,7 @@ public class CreateSql {
                 "    SUM(CASE WHEN t.TYPE = 'WITHDRAW' THEN t.AMOUNT ELSE 0 END) AS total_withdraw " +
                 "    SUM(CASE WHEN t.TYPE = %s THEN t.AMOUNT ELSE 0 END) AS total " +
                 "FROM TRANSACTIONS t " +
-                "WHERE t.USER_ID = " + user +") " +
+                "WHERE t.USER_ID = " + user + ") " +
                 "SELECT p.ID, p.NAME, %s AS SENTENCE_TEXT " +
                 "FROM PRODUCTS p " +
                 ", TransactionSums ts " +
@@ -140,22 +142,23 @@ public class CreateSql {
     }
 
 
-    private void examinationTotalRule(Optional<Rules> rules){
+    private void examinationTotalRule(Optional<Rules> rules) {
         boolean result = totalRules(rules.get());
-        if (result){
+        if (result) {
             logger.info("увеличили на 1");
-        }else {
+        } else {
             totalRules(rules.get());
             logger.info("создали и увеличили на 1");
         }
 
 
     }
+
     private boolean totalRules(Rules rules) {
         boolean flag = false;
         List<TotalRules> allTotalRule = totalRulesRepository.findAll();
         for (int i = 0; i < allTotalRule.size(); i++) {
-            if (allTotalRule.get(i).getRuleId().getId().equals(rules.getId())){
+            if (allTotalRule.get(i).getRuleId().getId().equals(rules.getId())) {
                 Long total = allTotalRule.get(i).getTotal();
                 allTotalRule.get(i).setTotal(++total);
                 return flag = true;
