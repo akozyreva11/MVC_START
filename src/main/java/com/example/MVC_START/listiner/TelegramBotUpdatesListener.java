@@ -37,13 +37,14 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
     public void init() {
         telegramBot.setUpdatesListener(this);
     }
+
     @Override
     public int process(List<Update> updates) {
         updates.forEach(update -> {
             logger.info("Processing update: {}", update);
             String message = update.message().text();
             String[] splitMessage = message.split(" ");
-            if (splitMessage[0].equals("/recommend")){
+            if (splitMessage[0].equals("/recommend")) {
                 Collection<User> userList = telegramBotRepository.getUser(splitMessage[1]);
                 userList.forEach(userDto -> {
                     Recommendation recommendation = starUserService.getRecommendation(userDto.getId());
@@ -58,7 +59,7 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
             }
 
             SendMessage sendMessage;
-            switch (update.message().text()){
+            switch (update.message().text()) {
                 case "/help":
                     sendMessage = new SendMessage(update.message().chat().id(),
                             getHelp());
@@ -75,13 +76,14 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
         });
         return UpdatesListener.CONFIRMED_UPDATES_ALL;
     }
-    private String getHelp(){
+
+    private String getHelp() {
         return "Список продуктов для данного клиента\n" +
                 "командау /recommend и свое имя.\n"
                 + "Например /recommend IVAN.PETROV";
     }
 
-    private String getHello(String firstName){
+    private String getHello(String firstName) {
         logger.info("Hello bot {}", firstName);
         return "Привет " + firstName + "!\n"
                 + "Помогу тебе найти кредитные продукты,на выгодных условиях";

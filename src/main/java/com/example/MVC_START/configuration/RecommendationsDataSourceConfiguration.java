@@ -29,6 +29,7 @@ public class RecommendationsDataSourceConfiguration {
     ) {
         return new JdbcTemplate(dataSource);
     }
+
     @Primary
     @Bean
     public DataSource defaultDataSource(DataSourceProperties properties) {

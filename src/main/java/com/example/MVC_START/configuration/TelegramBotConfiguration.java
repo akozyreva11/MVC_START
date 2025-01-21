@@ -1,4 +1,5 @@
 package com.example.MVC_START.configuration;
+
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.DeleteMyCommands;
 import org.springframework.beans.factory.annotation.Value;

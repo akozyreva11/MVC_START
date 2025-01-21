@@ -1,8 +1,10 @@
 package com.example.MVC_START.modelDTO;
+
 import jakarta.persistence.*;
 import org.springframework.data.annotation.Id;
 
 import java.util.Objects;
+
 @Entity
 public class TotalRules {
     @Id

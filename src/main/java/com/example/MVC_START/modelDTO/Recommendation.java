@@ -1,7 +1,8 @@
 package com.example.MVC_START.modelDTO;
+
 import org.apache.tomcat.util.digester.Rule;
+
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
